@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>مدیریت اضافه‌کاری</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <div><small>سیستم مدیریت منابع انسانی</small>
+                <h1>مدیریت اضافه‌کاری</h1>
+                <p>ثبت و گزارش‌گیری اضافه‌کاری پرسنل</p>
+            </div><label class="btn light">📥 ورود لیست پرسنل Excel<input id="file" type="file" accept=".xlsx,.xls"
+                    hidden></label>
+        </header>
+        <section class="stats">
+            <div><b id="pc">0</b><span>پرسنل فعال</span></div>
+            <div><b id="uc">0</b><span>واحدها</span></div>
+            <div><b id="oc">0</b><span>رکورد اضافه‌کاری</span></div>
+            <div><b id="hc">0</b><span>مجموع ساعات</span></div>
+        </section>
+        <main>
+            <nav><button class="active" data-t="work">ثبت اضافه‌کاری</button><button
+                    data-t="report">گزارش‌ها</button><button data-t="people">پرسنل</button></nav>
+            <section id="work" class="tab active">
+                <div class="grid"><label>نوع<select id="type">
+                            <option value="1">شنبه تا چهارشنبه</option>
+                            <option value="2">پنجشنبه و جمعه</option>
+                            <option value="3">خارج از سهمیه</option>
+                        </select></label><label>واحد<select id="unit"></select></label><label>تاریخ<div class="picker">
+                            <input id="date" readonly placeholder="انتخاب تاریخ"><button id="calBtn">📅</button>
+                            <div id="calendar"></div>
+                        </div></label><label>جستجو<input id="search" placeholder="کد پرسنلی یا نام"></label></div>
+                <div id="info" class="info"></div>
+                <div id="people"></div>
+                <div class="entry"><label>ساعت<input id="hours" type="number" min="0.5" step=".5"
+                            value="2"></label><label>توضیحات<input id="desc"
+                            placeholder="توضیحات اختیاری"></label><button id="save" class="btn">ثبت اضافه‌کاری</button>
+                </div>
+            </section>
+            <section id="report" class="tab">
+                <h2>گزارش‌ها</h2>
+                <div class="grid"><label>از تاریخ<input id="from" readonly></label><label>تا تاریخ<input id="to"
+                            readonly></label><label>واحد<select id="ru"></select></label><label>نوع<select id="rt">
+                            <option value="">همه</option>
+                            <option value="1">شنبه تا چهارشنبه</option>
+                            <option value="2">پنجشنبه و جمعه</option>
+                            <option value="3">خارج از سهمیه</option>
+                        </select></label></div><button id="exportReport" class="btn">📤 خروجی Excel گزارش</button>
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>تاریخ</th>
+                                <th>پرسنلی</th>
+                                <th>نام</th>
+                                <th>واحد</th>
+                                <th>نوع</th>
+                                <th>ساعت</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rb"></tbody>
+                    </table>
+                </div>
+            </section>
+            <section id="people" class="tab">
+                <h2>لیست پرسنل</h2>
+                <p>فایل Excel ورودی باید دقیقاً سه ستون داشته باشد:</p>
+                <div class="columns">پرسنلی &nbsp; | &nbsp; نام و نام خانوادگی &nbsp; | &nbsp; واحد</div>
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>پرسنلی</th>
+                                <th>نام و نام خانوادگی</th>
+                                <th>واحد</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pb"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        <footer>داده‌های این نسخه در LocalStorage مرورگر ذخیره می‌شوند.</footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
